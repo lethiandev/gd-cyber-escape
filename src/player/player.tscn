@@ -161,6 +161,7 @@ shape = SubResource( 9 )
 
 [node name="PinJoint2D" type="PinJoint2D" parent="IKArm/LowerArm/HandleArea2D"]
 node_a = NodePath("../..")
+disable_collision = false
 
 [node name="Cursor" type="Sprite" parent="."]
 z_index = 1

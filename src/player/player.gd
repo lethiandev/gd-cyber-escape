@@ -1,6 +1,11 @@
 extends Node2D
 
-var flipped = false
+export var enabled = true \
+	setget set_enabled, is_enabled
+
+export var flipped = false \
+	setget set_flipped, is_flipped
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -12,22 +17,37 @@ func _input(p_event: InputEvent) -> void:
 		$IKArm.clamp_target_position()
 
 func _process(p_delta: float) -> void:
+	if not enabled:
+		return
 	if Input.is_action_just_pressed("flip_side"):
-		flipped = not flipped
-		_flip_side(flipped)
+		set_flipped(not flipped)
 	if Input.is_action_just_pressed("grab"):
 		$IKArm/LowerArm/HandleArea2D.grab()
 	if Input.is_action_just_released("grab"):
 		$IKArm/LowerArm/HandleArea2D.release()
-	update()
 
-func _flip_side(p_flipped: bool) -> void:
-	$Chest/BaseSprite.flip_h = p_flipped
-	$Chest/OutlineSprite.flip_h = p_flipped
-	$Head/BaseSprite.flip_h = p_flipped
-	$Head/OutlineSprite.flip_h = p_flipped
-	$IKArm.joint_flipped = p_flipped
-	$IKArm/LowerArm/BaseSprite.flip_h = p_flipped
-	$IKArm/LowerArm/OutlineSprite.flip_h = p_flipped
-	$IKArm/UpperArm/BaseSprite.flip_h = p_flipped
-	$IKArm/UpperArm/OutlineSprite.flip_h = p_flipped
+
+func set_enabled(p_enabled: bool) -> void:
+	enabled = p_enabled
+	$IKArm/UpperArm.enabled = enabled
+	$IKArm/LowerArm.enabled = enabled
+	$Cursor.visible = enabled
+
+func is_enabled() -> bool:
+	return enabled
+
+
+func set_flipped(p_flipped: bool) -> void:
+	flipped = p_flipped
+	$Chest/BaseSprite.flip_h = flipped
+	$Chest/OutlineSprite.flip_h = flipped
+	$Head/BaseSprite.flip_h = flipped
+	$Head/OutlineSprite.flip_h = flipped
+	$IKArm.joint_flipped = flipped
+	$IKArm/LowerArm/BaseSprite.flip_h = flipped
+	$IKArm/LowerArm/OutlineSprite.flip_h = flipped
+	$IKArm/UpperArm/BaseSprite.flip_h = flipped
+	$IKArm/UpperArm/OutlineSprite.flip_h = flipped
+
+func is_flipped() -> bool:
+	return flipped
