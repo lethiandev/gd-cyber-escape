@@ -31,7 +31,7 @@ func set_enabled(p_enabled: bool) -> void:
 	enabled = p_enabled
 	$IKArm/UpperArm.enabled = enabled
 	$IKArm/LowerArm.enabled = enabled
-	$Cursor.visible = enabled
+	$World/Cursor.visible = enabled
 
 func is_enabled() -> bool:
 	return enabled

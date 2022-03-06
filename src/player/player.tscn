@@ -35,6 +35,7 @@ script = ExtResource( 2 )
 [node name="Chest" type="RigidBody2D" parent="."]
 collision_layer = 0
 mass = 2.0
+can_sleep = false
 
 [node name="BaseSprite" type="Sprite" parent="Chest"]
 texture = ExtResource( 1 )
@@ -53,6 +54,7 @@ polygon = PoolVector2Array( -5, -7, 5, -7, 5, 3, 2, 7, -2, 7, -5, 3 )
 [node name="Head" type="RigidBody2D" parent="."]
 position = Vector2( 0, -12 )
 collision_layer = 0
+can_sleep = false
 script = ExtResource( 3 )
 target_node = NodePath("../Chest")
 target_speed = 5.0
@@ -78,6 +80,7 @@ node_b = NodePath("../../Chest")
 
 [node name="IKArm" type="Node2D" parent="."]
 position = Vector2( 0, -4 )
+rotation = 1.57079
 script = ExtResource( 4 )
 upper_arm = NodePath("UpperArm")
 upper_length = 11.0
@@ -87,6 +90,7 @@ lower_length = 12.0
 [node name="UpperArm" type="RigidBody2D" parent="IKArm"]
 position = Vector2( 4, 0 )
 collision_layer = 0
+can_sleep = false
 script = ExtResource( 3 )
 
 [node name="BaseSprite" type="Sprite" parent="IKArm/UpperArm"]
@@ -118,6 +122,7 @@ node_b = NodePath("../../../Chest")
 position = Vector2( 18, 0 )
 collision_layer = 0
 physics_material_override = SubResource( 6 )
+can_sleep = false
 script = ExtResource( 3 )
 
 [node name="BaseSprite" type="Sprite" parent="IKArm/LowerArm"]
@@ -163,9 +168,11 @@ shape = SubResource( 9 )
 node_a = NodePath("../..")
 disable_collision = false
 
-[node name="Cursor" type="Sprite" parent="."]
+[node name="World" type="Node" parent="."]
+
+[node name="Cursor" type="Sprite" parent="World"]
 z_index = 1
 texture = ExtResource( 7 )
 script = ExtResource( 6 )
-root_node = NodePath("../IKArm/UpperArm/PinJoint2D")
-target_node = NodePath("../IKArm")
+root_node = NodePath("../../IKArm/UpperArm/PinJoint2D")
+target_node = NodePath("../../IKArm")
