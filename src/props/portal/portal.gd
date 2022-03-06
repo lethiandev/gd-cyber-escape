@@ -1,8 +1,5 @@
 extends StaticBody2D
 
-signal portal_entered(player)
-signal portal_exited(player)
-
 export var enabled = false \
 	setget set_enabled, get_enabled
 
@@ -23,9 +20,6 @@ func get_enabled() -> bool:
 
 func _on_body_entered(p_body: PhysicsBody2D) -> void:
 	var player = p_body.get_parent()
-	emit_signal("portal_entered", player)
-	$ZapPlayer.play()
-
-func _on_body_exited(p_body: PhysicsBody2D):
-	var player = p_body.get_parent()
-	emit_signal("portal_exited", player)
+	if player.has_method("teleport") and not player.teleported:
+		player.teleport()
+		$ZapPlayer.play()

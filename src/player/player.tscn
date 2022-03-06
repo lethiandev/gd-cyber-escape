@@ -188,3 +188,8 @@ texture = ExtResource( 7 )
 script = ExtResource( 6 )
 root_node = NodePath("../../IKArm/UpperArm/PinJoint2D")
 target_node = NodePath("../../IKArm")
+
+[connection signal="body_entered" from="Chest" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Head" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="IKArm/UpperArm" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="IKArm/LowerArm" to="." method="_on_body_entered"]

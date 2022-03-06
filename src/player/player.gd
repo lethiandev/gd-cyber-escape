@@ -1,5 +1,8 @@
 extends Node2D
 
+signal player_teleported()
+signal player_killed()
+
 export var enabled = true \
 	setget set_enabled, is_enabled
 
@@ -17,6 +20,8 @@ func _input(p_event: InputEvent) -> void:
 		$IKArm.clamp_target_position()
 
 func _process(p_delta: float) -> void:
+	if Input.is_action_just_pressed("restart"):
+		kill()
 	if not enabled or killed:
 		return
 	if Input.is_action_just_pressed("flip_side"):
@@ -27,6 +32,8 @@ func _process(p_delta: float) -> void:
 		$IKArm/LowerArm/HandleArea2D.release()
 
 func teleport() -> void:
+	if teleported:
+		return
 	teleported = true
 	# Make player's body static
 	$Chest.mode = RigidBody2D.MODE_KINEMATIC
@@ -34,19 +41,24 @@ func teleport() -> void:
 	$IKArm/UpperArm.mode = RigidBody2D.MODE_KINEMATIC
 	$IKArm/LowerArm.mode = RigidBody2D.MODE_KINEMATIC
 	# Hide colored limbs' sprites
-	$Chest/BaseSprite.visible = false
 	$Chest/PortalEffect.visible = true
-	$Head/BaseSprite.visible = false
-	$IKArm/UpperArm/BaseSprite.visible = false
-	$IKArm/LowerArm/BaseSprite.visible = false
+	set_sprite_visible(false)
 	set_enabled(false)
+	EventBus.emit_player_teleported(self)
 
 func kill() -> void:
+	if killed:
+		return
 	killed = true
 	$Head/PinJoint2D.queue_free()
 	$IKArm/UpperArm/PinJoint2D.queue_free()
 	$IKArm/LowerArm/PinJoint2D.queue_free()
 	set_enabled(false)
+	EventBus.emit_player_killed(self)
+	# Blink the body parts
+	set_sprite_visible(false)
+	yield(get_tree().create_timer(0.2), "timeout")
+	set_sprite_visible(true)
 
 
 func set_enabled(p_enabled: bool) -> void:
@@ -79,5 +91,12 @@ func is_flipped() -> bool:
 
 
 func _on_body_entered(p_body: PhysicsBody2D) -> void:
-	if not $HitPlayer.is_playing():
-		$HitPlayer.play()
+	if p_body and p_body.is_in_group("hurt"):
+		kill()
+
+
+func set_sprite_visible(p_visible: bool) -> void:
+	$Chest/BaseSprite.visible = p_visible
+	$Head/BaseSprite.visible = p_visible
+	$IKArm/UpperArm/BaseSprite.visible = p_visible
+	$IKArm/LowerArm/BaseSprite.visible = p_visible

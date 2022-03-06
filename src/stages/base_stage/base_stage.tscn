@@ -32,9 +32,3 @@ format = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.333, 0.333 )
-
-[node name="OutroTimer" type="Timer" parent="."]
-wait_time = 0.75
-one_shot = true
-
-[connection signal="timeout" from="OutroTimer" to="." method="_on_outro_timeout"]
