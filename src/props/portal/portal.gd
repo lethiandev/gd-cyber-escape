@@ -24,6 +24,7 @@ func get_enabled() -> bool:
 func _on_body_entered(p_body: PhysicsBody2D) -> void:
 	var player = p_body.get_parent()
 	emit_signal("portal_entered", player)
+	$ZapPlayer.play()
 
 func _on_body_exited(p_body: PhysicsBody2D):
 	var player = p_body.get_parent()
