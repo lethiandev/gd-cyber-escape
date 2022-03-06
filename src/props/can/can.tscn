@@ -12,6 +12,8 @@ random_pitch = 1.06
 
 [node name="AudioStreamPlayer" parent="." index="0"]
 stream = SubResource( 1 )
+volume_db = -12.0
+pitch_scale = 0.9
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )

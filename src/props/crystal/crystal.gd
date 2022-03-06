@@ -4,6 +4,7 @@ func _ready() -> void:
 	connect("body_entered", self, "_on_body_entered")
 
 func _on_body_entered(p_body: PhysicsBody2D) -> void:
-	var has_speed = linear_velocity.length_squared() > 5.0 or angular_velocity > 5.0
-	if has_speed and not $AudioStreamPlayer.is_playing():
+	var speed = linear_velocity.length() + angular_velocity * 0.2
+	if speed > 6.0 and not $AudioStreamPlayer.is_playing():
+		$AudioStreamPlayer.volume_db = -20.0 * (1.0 - clamp(speed / 50.0, 0.0, 1.0))
 		$AudioStreamPlayer.play()

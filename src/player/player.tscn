@@ -36,6 +36,8 @@ script = ExtResource( 2 )
 [node name="Chest" type="RigidBody2D" parent="."]
 collision_layer = 4
 mass = 2.0
+contacts_reported = 1
+contact_monitor = true
 can_sleep = false
 
 [node name="BaseSprite" type="Sprite" parent="Chest"]
@@ -58,6 +60,8 @@ visible = false
 [node name="Head" type="RigidBody2D" parent="."]
 position = Vector2( 0, -12 )
 collision_layer = 4
+contacts_reported = 1
+contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
 target_node = NodePath("../Chest")
@@ -94,6 +98,8 @@ lower_length = 12.0
 [node name="UpperArm" type="RigidBody2D" parent="IKArm"]
 position = Vector2( 4, 0 )
 collision_layer = 8
+contacts_reported = 1
+contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
 
@@ -126,6 +132,8 @@ node_b = NodePath("../../../Chest")
 position = Vector2( 18, 0 )
 collision_layer = 8
 physics_material_override = SubResource( 6 )
+contacts_reported = 1
+contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
 

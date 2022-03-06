@@ -54,6 +54,8 @@ func set_enabled(p_enabled: bool) -> void:
 	$IKArm/UpperArm.enabled = enabled
 	$IKArm/LowerArm.enabled = enabled
 	$World/Cursor.visible = enabled
+	# Release grabbed items
+	$IKArm/LowerArm/HandleArea2D.release()
 
 func is_enabled() -> bool:
 	return enabled
@@ -74,3 +76,8 @@ func set_flipped(p_flipped: bool) -> void:
 
 func is_flipped() -> bool:
 	return flipped
+
+
+func _on_body_entered(p_body: PhysicsBody2D) -> void:
+	if not $HitPlayer.is_playing():
+		$HitPlayer.play()

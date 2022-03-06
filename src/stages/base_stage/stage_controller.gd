@@ -1,5 +1,6 @@
 extends Node
 
+export var next_stage: PackedScene = null
 export var player_node = NodePath()
 
 func _on_portal_entered(p_player: Node) -> void:
