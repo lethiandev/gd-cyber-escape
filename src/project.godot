@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 CaptureMouse="*res://singletons/capture_mouse.gd"
 Background="*res://singletons/background.gd"
 Transition="*res://singletons/transition/transition.tscn"
+MusicPlayer="*res://singletons/music_player/music_player.tscn"
 
 [display]
 
