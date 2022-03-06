@@ -1,8 +1,5 @@
 extends Node2D
 
-signal player_teleported()
-signal player_killed()
-
 export var enabled = true \
 	setget set_enabled, is_enabled
 
@@ -50,6 +47,7 @@ func kill() -> void:
 	if killed:
 		return
 	killed = true
+	$HurtPlayer.play()
 	$Head/PinJoint2D.queue_free()
 	$IKArm/UpperArm/PinJoint2D.queue_free()
 	$IKArm/LowerArm/PinJoint2D.queue_free()
