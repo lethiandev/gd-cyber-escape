@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://props/base_item/hit.wav" type="AudioStream" id=1]
+[ext_resource path="res://props/crystal/crystal.gd" type="Script" id=3]
+
+[sub_resource type="AudioStreamRandomPitch" id=1]
+audio_stream = ExtResource( 1 )
+random_pitch = 1.06
+
+[node name="BaseItem" type="RigidBody2D"]
+collision_layer = 3
+contacts_reported = 3
+contact_monitor = true
+script = ExtResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 1 )
+volume_db = -10.0

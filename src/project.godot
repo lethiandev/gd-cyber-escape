@@ -14,6 +14,11 @@ config/name="Cyber Arm"
 run/main_scene="res://stages/basement/basement_stage.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+CaptureMouse="*res://singletons/capture_mouse.gd"
+Background="*res://singletons/background.gd"
+
 [display]
 
 window/size/width=1280
@@ -60,6 +65,8 @@ flip_side={
 
 2d_physics/layer_1="Solid"
 2d_physics/layer_2="Grabbable"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="PlayerArm"
 
 [physics]
 
