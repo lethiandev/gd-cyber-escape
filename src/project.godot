@@ -18,11 +18,14 @@ config/icon="res://icon.png"
 
 CaptureMouse="*res://singletons/capture_mouse.gd"
 Background="*res://singletons/background.gd"
+Transition="*res://singletons/transition/transition.tscn"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [importer_defaults]
 

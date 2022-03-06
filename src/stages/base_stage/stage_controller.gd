@@ -1,7 +1,10 @@
 extends Node
 
-export var next_stage: PackedScene = null
+export(String, FILE, "*.tscn") var next_stage: String
 export var player_node = NodePath()
+
+func _ready() -> void:
+	Transition.fade_in()
 
 func _on_portal_entered(p_player: Node) -> void:
 	if "killed" in p_player and p_player.killed:
@@ -14,3 +17,9 @@ func _on_portal_entered(p_player: Node) -> void:
 func _on_outro_timeout():
 	if has_node(player_node):
 		get_node(player_node).queue_free()
+	$OutroTimer.queue_free()
+	_goto_next_stage()
+
+func _goto_next_stage() -> void:
+	yield(Transition.fade_out(), "completed")
+	get_tree().change_scene(next_stage)

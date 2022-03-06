@@ -9,6 +9,7 @@
 [ext_resource path="res://props/chute/chute.tscn" type="PackedScene" id=7]
 
 [node name="Basement01Stage" instance=ExtResource( 1 )]
+next_stage = "res://stages/basement/basement_02_stage.tscn"
 player_node = NodePath("Actors/Player")
 
 [node name="Background" parent="." index="0"]
