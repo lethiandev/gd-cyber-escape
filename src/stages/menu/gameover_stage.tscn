@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://stages/menu/messages.png" type="Texture" id=1]
+[ext_resource path="res://stages/menu/menu_stage.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "loop"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 3 ) ]
+}
+
+[node name="GameOverStage" type="Node"]
+script = ExtResource( 2 )
+next_stage = "res://stages/menu/menu_stage.tscn"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.333, 0.333 )
+
+[node name="Message" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Message"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 128, 32 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Message"]
+root_node = NodePath("../Sprite")
+autoplay = "loop"
+anims/RESET = SubResource( 2 )
+anims/loop = SubResource( 1 )
