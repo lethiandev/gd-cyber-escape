@@ -12,7 +12,6 @@
 
 [node name="BasementStage" type="Node"]
 script = ExtResource( 8 )
-player_node = NodePath("Actors/Player")
 
 [node name="Background" type="TileMap" parent="."]
 z_index = -1
@@ -72,7 +71,6 @@ autostart = true
 wait_time = 0.75
 one_shot = true
 
-[connection signal="portal_entered" from="Actors/Portal" to="." method="_on_portal_entered"]
 [connection signal="timeout" from="IntroTimer" to="Actors/Player" method="set_enabled" binds= [ true ]]
 [connection signal="timeout" from="IntroTimer" to="TileMap/Chute" method="set_constant_linear_velocity" binds= [ Vector2( 0, 0 ) ]]
 [connection signal="timeout" from="OutroTimer" to="." method="_on_outro_timeout"]

@@ -18,8 +18,7 @@ func _process(p_delta: float) -> void:
 
 func set_belt_speed(p_speed: float) -> void:
 	belt_speed = p_speed
-	var motion_vector = Vector2(belt_speed, 0.0).rotated(global_rotation)
-	$Belt.constant_linear_velocity = motion_vector
+	$Belt.constant_linear_velocity = Vector2(belt_speed, 0.0)
 
 func get_belt_speed() -> float:
 	return belt_speed

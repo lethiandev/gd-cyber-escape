@@ -42,6 +42,8 @@ func teleport() -> void:
 	set_sprite_visible(false)
 	set_enabled(false)
 	EventBus.emit_player_teleported(self)
+	yield(get_tree().create_timer(0.5), "timeout")
+	queue_free()
 
 func kill() -> void:
 	if killed:

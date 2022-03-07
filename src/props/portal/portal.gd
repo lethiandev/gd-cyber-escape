@@ -21,5 +21,5 @@ func get_enabled() -> bool:
 func _on_body_entered(p_body: PhysicsBody2D) -> void:
 	var player = p_body.get_parent()
 	if player.has_method("teleport") and not player.teleported:
-		player.teleport()
+		player.call_deferred("teleport")
 		$ZapPlayer.play()
